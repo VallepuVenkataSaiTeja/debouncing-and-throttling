@@ -17,6 +17,7 @@ function fibonacci(n) {
     cache[n] = result;                                   // Store result in cache
     return result;                                       // Return result
 }
+```
  
 ## Key Points
 
@@ -31,3 +32,4 @@ function fibonacci(n) {
 ```js
 console.log(fibonacci(10)); // Output: 55
 console.log(fibonacci(44)); // Output: 701408733 (computed quickly)
+```
