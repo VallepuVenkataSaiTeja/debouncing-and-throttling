@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing and Throttling</title>
+</head>
+<body>
+    
+    <div>
+        <input type="text" id="input">
+    </div>
+    <br>
+    
+    <div>
+        <span>default:</span>
+        <span id="default"></span>
+    </div>
+
+    <div>
+        <span>debounce:</span>
+        <span id="debou"></span>
+    </div>
+
+    <div>
+        <span>throttle:</span>
+        <span id="thr"></span>
+    </div>
+
+    <div>
+        <p>Default → updates every time</p>
+        <p>Debounce → updates after stop typing</p>
+        <p>Throttle → updates immediately, then only once every 1 second</p>
+    </div>
+
+    <script>
+        const text = document.getElementById('input');
+        const def = document.getElementById('default');
+        const debou= document.getElementById('debou');
+        const thr= document.getElementById('thr');
+
+        text.addEventListener('input', e=>{
+            def.innerText = e.target.value;
+        })
+
+        let timer;
+
+        text.addEventListener('input', e=>{
+           clearTimeout(timer);
+
+           timer = setTimeout(()=>{
+            debou.innerText = e.target.value;
+           }, 1000)
+        })
+
+        let throttleLock = false;
+
+        text.addEventListener('input', e=>{
+
+            if(throttleLock) return;
+
+            thr.innerText = e.target.value;
+
+            throttleLock = true;
+            setTimeout(()=>{
+                throttleLock = false;
+            },1000)
+        })
+
+    </script>
+</body>
+</html>
